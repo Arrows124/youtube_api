@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    index
+{% endblock %}
+
+{% block main %}
+      <a href="#" onclick="signOut();">Sign out</a>
+      <script>
+        function signOut() {
+          var auth2 = gapi.auth2.getAuthInstance();
+          auth2.signOut().then(function () {
+            console.log('User signed out.');
+          });
+        }
+      </script>
+       <table class="table table-striped">
+         <thead>
+            <tr>
+               <th>Thumbnail</th>
+               <th>Title</th>
+               <th>URL</th>
+            </tr>
+          </thead>
+          <tbody>
+             {% for title,thumbnail,video_id in result_videos %}
+               <tr>
+                 <th>
+                   <img src= '{{ thumbnail }}'>
+                 </th>
+                 <td>{{ title }}</td>
+                 <td><u><a href="http://www.youtube.com/watch?v={{ video_id }}">こちら</a></u></td>
+               </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+{% endblock %}

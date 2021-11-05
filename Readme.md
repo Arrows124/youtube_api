@@ -2,7 +2,8 @@
 
 Video Demo: https://youtu.be/y-NGJwQaApY
 
-# Description: It is a web application that allows you to search highly rated youtube videos based on search keywords using the framework Flsak. I often watch youtube, but when I want to look back on the videos that I highly rated in the past, there are too many highly rated videos and it is difficult to find them. Therefore, I want to make a web application that can search highly rated youtube videos.
+# Description
+It is a web application that allows you to search highly rated youtube videos based on search keywords using the framework Flsak. I often watch youtube, but when I want to look back on the videos that I highly rated in the past, there are too many highly rated videos and it is difficult to find them. Therefore, I want to make a web application that can search highly rated youtube videos.
 
 1 Use the Youtube API to get information about highly rated videos (python)
 
@@ -10,7 +11,7 @@ Video Demo: https://youtu.be/y-NGJwQaApY
 
 3 Set up a search form on the home screen of the Web application and use the SELECT statement to acquire videos related to the keyword (SQL, python, HTML).
 
-# directory and files
+# Directory and files
 
 application/
 
@@ -38,7 +39,7 @@ application/
 
 ┣ search.html (検索フォームがコードされたhtml)
 
-# The details of the main app.py are explained below.
+# The details of the main app.py
 
 The first few lines import modules used for flask, sqlite3, youtube API, etc. After that, code as described in How to use youtube api. Store what was executed by youtube.videos (). list (myRating = "like", part = "snippet, status", maxResults = 50) .execute () in videos_list_responses. This execution result gets all the information of the highly rated video through the API. Next, name the database created with create_db.py dbname, get the title, thumbnail and video ID of the highly rated video you got earlier, and insert it into the SQL table created with create_table.py.
 

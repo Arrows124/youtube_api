@@ -92,7 +92,7 @@ def search():
             return redirect("/")
          
         keyword='%'+keyword+'%'
-        #データベースに接続し、検索ワードを含む動画を取得
+        #データベースに接続し、検索ワードを含む動画のタイトル、サムネイル、リンクを取得
         conn = sqlite3.connect(dbname)
         cur = conn.cursor()
         cur.execute("SELECT title, thumbnail, video_id FROM videos WHERE title LIKE ? GROUP BY title",(keyword,))

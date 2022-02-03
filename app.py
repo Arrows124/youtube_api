@@ -1,6 +1,4 @@
 #!/usr/bin/python
-
-#Flaskとrender_template（HTMLを表示させるための関数）をインポート
 from flask import Flask,render_template,request,redirect
 import sqlite3
 import httplib2
@@ -73,7 +71,7 @@ videos_list_responses = youtube.videos().list(
     ).execute()
 
 dbname = 'goodvideos.db'
-
+#youtubeAPIにより最新45個高評価の動画を取得し、データベースに登録
 for count in range(45):
     conn = sqlite3.connect(dbname)
     cur = conn.cursor()
@@ -84,25 +82,7 @@ for count in range(45):
     cur.close()
     conn.close()
 
-"""titles=[]
-thumbnail=[]
-video_id=[]
-for i in range():
-    titles.append(result_video[])
-    thumbnail.append(videos_list_responses['items'][i]['snippet']['thumbnails']['default']['url'])
-    video_id.append(videos_list_responses['items'][i]['id'])
-    data = zip(titles, thumbnail, video_id)"""
-"""
-titles = []
-while videos_list_responses:
-    for title in videos_list_responses['items']:
-        titles.append(title['title'])"""
-"""videos_list_response = videos_list_responses["items"][i]
-    snippet.append(videos_list_response['snippet'])"""
 
-print("complate!!")
-
-#Flaskオブジェクトの生成
 app = Flask(__name__)
 @app.route("/",methods=["GET", "POST"])
 def search():
@@ -110,7 +90,9 @@ def search():
         keyword = request.form.get("keyword")
         if not keyword:
             return redirect("/")
+         
         keyword='%'+keyword+'%'
+        #データベースに接続し、検索ワードを含む動画を取得
         conn = sqlite3.connect(dbname)
         cur = conn.cursor()
         cur.execute("SELECT title, thumbnail, video_id FROM videos WHERE title LIKE ? GROUP BY title",(keyword,))
@@ -120,13 +102,10 @@ def search():
         return render_template("search.html")#login.html
 
 
-
-#「/index」へアクセスがあった場合に、「index.html」を返す
 @app.route("/index")
 def index():
     return render_template("index.html",result_videos=result_videos)
 
 
-#おまじない
 if __name__ == "__main__":
     app.run(debug=True)

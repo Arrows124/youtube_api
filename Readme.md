@@ -1,4 +1,4 @@
-# Youtube高評価検索ツール
+# Youtube高評価検索ツール(メインはapp.pyです)
 
 Video Demo: https://youtu.be/wMm0Ux_k8FQ
 
